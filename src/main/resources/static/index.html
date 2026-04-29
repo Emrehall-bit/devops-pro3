@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Management Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="app-shell">
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">DevOps-Pro3</p>
+            <h1>Medical Management Dashboard</h1>
+            <p class="subtitle">Hasta, doktor ve randevu kayitlarini tek ekrandan yonetin.</p>
+        </div>
+        <button id="refreshAllButton" class="secondary-button" type="button">Verileri Yenile</button>
+    </header>
+
+    <section class="stats-grid" aria-label="Genel durum">
+        <article class="stat-panel">
+            <span class="stat-label">Toplam Hasta</span>
+            <strong id="patientCount" class="stat-value">0</strong>
+        </article>
+        <article class="stat-panel">
+            <span class="stat-label">Toplam Doktor</span>
+            <strong id="doctorCount" class="stat-value">0</strong>
+        </article>
+        <article class="stat-panel">
+            <span class="stat-label">Toplam Randevu</span>
+            <strong id="appointmentCount" class="stat-value">0</strong>
+        </article>
+    </section>
+
+    <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+    <main class="content-grid">
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Hastalar</h2>
+                    <p>Kisi bilgilerini kaydedin ve listeden yonetin.</p>
+                </div>
+            </div>
+            <form id="patientForm" class="form-grid">
+                <label>
+                    <span>Ad Soyad</span>
+                    <input name="name" type="text" required maxlength="120" placeholder="Ornek: Ayse Yilmaz">
+                </label>
+                <label>
+                    <span>Adres</span>
+                    <input name="address" type="text" maxlength="255" placeholder="Ornek: Istanbul">
+                </label>
+                <label>
+                    <span>Telefon</span>
+                    <input name="telephone" type="text" required maxlength="30" placeholder="Ornek: 0555 000 00 00">
+                </label>
+                <button class="primary-button" type="submit">Hasta Ekle</button>
+            </form>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Adres</th>
+                        <th>Telefon</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="patientsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Doktorlar</h2>
+                    <p>Klinik bazli doktor kayitlarini yonetin.</p>
+                </div>
+            </div>
+            <form id="doctorForm" class="form-grid">
+                <label>
+                    <span>Ad Soyad</span>
+                    <input name="name" type="text" required maxlength="120" placeholder="Ornek: Dr. Mehmet Kaya">
+                </label>
+                <label>
+                    <span>Klinik</span>
+                    <input name="clinic" type="text" required maxlength="120" placeholder="Ornek: Kardiyoloji">
+                </label>
+                <button class="primary-button" type="submit">Doktor Ekle</button>
+            </form>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Klinik</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="doctorsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel panel-wide">
+            <div class="panel-header">
+                <div>
+                    <h2>Randevular</h2>
+                    <p>Hasta ve doktor secerek yeni randevu olusturun.</p>
+                </div>
+            </div>
+            <form id="appointmentForm" class="form-grid appointment-grid">
+                <label>
+                    <span>Hasta</span>
+                    <select id="patientSelect" name="patientId" required>
+                        <option value="">Hasta secin</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Doktor</span>
+                    <select id="doctorSelect" name="doctorId" required>
+                        <option value="">Doktor secin</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Tarih</span>
+                    <input name="appointmentDate" type="date" required>
+                </label>
+                <label>
+                    <span>Saat</span>
+                    <input name="appointmentTime" type="time" required>
+                </label>
+                <button class="primary-button" type="submit">Randevu Ekle</button>
+            </form>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Hasta</th>
+                        <th>Doktor</th>
+                        <th>Tarih</th>
+                        <th>Saat</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="appointmentsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="/app.js" defer></script>
+</body>
+</html>
